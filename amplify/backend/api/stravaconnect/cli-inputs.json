@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "paths": {
+    "/auth": {
+      "name": "/auth",
+      "lambdaFunction": "stravaauth",
+      "permissions": {
+        "setting": "open"
+      }
+    },
+    "/getData": {
+      "name": "/getData",
+      "lambdaFunction": "getstravadata",
+      "permissions": {
+        "setting": "open"
+      }
+    },
+    "/gettoken": {
+      "name": "/gettoken",
+      "lambdaFunction": "getstravatoken",
+      "permissions": {
+        "setting": "open"
+      }
+    }
+  }
+}

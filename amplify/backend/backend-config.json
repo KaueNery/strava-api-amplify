@@ -1,0 +1,101 @@
+{
+  "api": {
+    "stravaconnect": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "stravaauth"
+        },
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "getstravadata"
+        },
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "getstravatoken"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "API Gateway"
+    }
+  },
+  "function": {
+    "getstravadata": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "getstravatoken": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "stravaauth": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    }
+  },
+  "parameters": {
+    "AMPLIFY_function_getstravadata_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "getstravadata"
+        }
+      ]
+    },
+    "AMPLIFY_function_getstravadata_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "getstravadata"
+        }
+      ]
+    },
+    "AMPLIFY_function_getstravatoken_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "getstravatoken"
+        }
+      ]
+    },
+    "AMPLIFY_function_getstravatoken_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "getstravatoken"
+        }
+      ]
+    },
+    "AMPLIFY_function_stravaauth_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "stravaauth"
+        }
+      ]
+    },
+    "AMPLIFY_function_stravaauth_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "stravaauth"
+        }
+      ]
+    }
+  }
+}
