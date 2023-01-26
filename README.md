@@ -5,7 +5,7 @@ How to use:
 
 1 - Configure your strava account for using the api : https://www.strava.com/settings/api
 
-2 - Set the information in the functions needed - stravaauth and getsravatoken
+2 - Set the information in the functions needed - stravaauth and getstravatoken
 
 const config = {
     client_id: 101037,
