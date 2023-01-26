@@ -6,13 +6,12 @@ or in the "license" file accompanying this file. This file is distributed on an 
 See the License for the specific language governing permissions and limitations under the License.
 */
 
-
-const axios = require('axios');
-const { stringify } = require('flatted');
-
 const express = require('express')
 const bodyParser = require('body-parser')
 const awsServerlessExpressMiddleware = require('aws-serverless-express/middleware')
+const axios = require('axios');
+axios.defaults.baseURL = `https://www.strava.com/api/v3`;
+const { stringify } = require('flatted');
 
 // declare a new express app
 const app = express()
@@ -27,31 +26,40 @@ app.use(function(req, res, next) {
 });
 
 //method for fetching the activities data 
-//Receive params = token, before date, after data 
+//Receive params = token, before date, after date, page and perPage
 //Return json filtered data 
 app.get('/getData', async function(req, res) {
     const accessToken = req.query.token;
 
-    const data = await getUserData(accessToken, req.query.before, req.query.after);
+    const data = await getUserData(accessToken, req.query.before, req.query.after, req.query.page ,req.query.perPage);
     res.send(stringify(data));
 });
 
-const getUserData = async ( accessToken, beforeparam, afterparam ) => {
-  try {
-      //create epoch timestamps
-      const before = Math.floor(+new Date(beforeparam) / 1000);
-      const after = Math.floor(+new Date(afterparam) / 1000);
+const getUserData = async ( accessToken, beforeparam, afterparam, page, perPage ) => {
+    try {
+        //create epoch timestamps
+        const before = Math.floor(+new Date(beforeparam) / 1000);
+        const after = Math.floor(+new Date(afterparam) / 1000);
 
-      //call strava api 
-      const response = await axios.get(
-          `https://www.strava.com/api/v3/athlete/activities?before=` + before + '&after=' + after,
-          { headers: { Authorization: `Bearer ${accessToken}` } }
-      );
+        const url = `/athlete/activities`;
+        var params = {};
+        if(beforeparam) params["before"] = before;
+        if(afterparam) params["after"] = after;
+        if(page) params["page"] = page;
+        if(perPage) params["per_page"] = perPage;
 
-      return response;
-  } catch (error) {
-      console.log(error);
-  }
+        const response = await axios.get(
+            url,
+            {
+                params : params,
+                headers: { Authorization: `Bearer ${accessToken}` }
+            }
+        );
+
+        return response;
+    } catch (error) {
+        console.log(error);
+    }
 };
 
 

@@ -1,5 +1,5 @@
 # AMPLIFY API FOR STRAVA
-This is a amplify api for authenticating, connecting and using the strava api. 
+This is an amplify api for authenticating, connecting and using the strava api. 
 
 How to use: 
 
@@ -33,3 +33,5 @@ note that the parameters for this endpoint are:
 - token REQUIRED (which we got in the "/auth" endpoint)
 - before NOT REQUIRED (which is used for filtering activities that have taken place before a certain time.)
 - after NOT REQUIRED (which is used for filtering activities that have taken place after a certain time.)
+- page NOT REQUIRED page number.
+- perPage NOT REQUIRED Number of items per page.
